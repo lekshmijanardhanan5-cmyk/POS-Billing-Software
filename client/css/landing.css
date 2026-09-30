@@ -424,21 +424,23 @@ body {
 
 .bento-card {
   background: var(--sq-card-bg);
-  border: 1px solid var(--sq-card-border);
-  border-radius: 18px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid var(--sq-card-border);
+  border-radius: 26px;
   padding: 32px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
 }
 
 .bento-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--sq-card-hover-border);
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5), 0 0 25px rgba(99, 102, 241, 0.1);
+  transform: translateY(-5px);
+  border-color: rgba(245, 158, 11, 0.45);
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.65), 0 0 25px rgba(245, 158, 11, 0.15);
 }
 
 .bento-col-2 {

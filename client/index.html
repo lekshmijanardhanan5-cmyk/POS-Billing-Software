@@ -12,9 +12,121 @@
   <link rel="stylesheet" href="/css/common.css?v=2">
   <link rel="stylesheet" href="/css/landing.css?v=2">
   <style>
+    /* Hero Section with Kerala Textiles Showroom Ambient Backdrop */
     .hero-section {
-      background: linear-gradient(180deg, rgba(9, 13, 22, 0.65) 0%, rgba(9, 13, 22, 0.82) 60%, rgba(9, 13, 22, 0.98) 100%),
+      background: linear-gradient(180deg, rgba(9, 13, 22, 0.62) 0%, rgba(9, 13, 22, 0.80) 60%, rgba(9, 13, 22, 0.98) 100%),
                   url('/images/store_bg.jpg') center top / cover no-repeat fixed !important;
+    }
+    
+    /* Interactive Hero POS Mockup Frame - Floating Glassmorphic Podium */
+    .hero-mockup-frame {
+      background: rgba(13, 20, 36, 0.88) !important;
+      backdrop-filter: blur(24px) !important;
+      -webkit-backdrop-filter: blur(24px) !important;
+      border: 1.5px solid rgba(245, 158, 11, 0.3) !important;
+      border-radius: 28px !important;
+      box-shadow: 0 30px 80px -15px rgba(0, 0, 0, 0.8), 0 0 50px rgba(99, 102, 241, 0.18) !important;
+      overflow: hidden;
+    }
+    .mockup-item-row {
+      border-radius: 16px !important;
+      background: rgba(255, 255, 255, 0.04) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      transition: all 0.2s ease;
+    }
+    .mockup-summary-card {
+      border-radius: 22px !important;
+      background: rgba(255, 255, 255, 0.05) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+    /* Section 2: Features Bento Grid - Deep Royal Indigo & Gold Ambient Glow */
+    #features {
+      background: radial-gradient(circle at 85% 15%, rgba(99, 102, 241, 0.15) 0%, transparent 45%),
+                  radial-gradient(circle at 15% 85%, rgba(245, 158, 11, 0.12) 0%, transparent 45%),
+                  #090e1a !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .bento-card {
+      border-radius: 26px !important;
+      background: rgba(255, 255, 255, 0.035) !important;
+      backdrop-filter: blur(14px) !important;
+      -webkit-backdrop-filter: blur(14px) !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .bento-card:hover {
+      transform: translateY(-5px) !important;
+      border-color: rgba(245, 158, 11, 0.45) !important;
+      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.65), 0 0 25px rgba(245, 158, 11, 0.15) !important;
+    }
+    .bento-icon {
+      border-radius: 16px !important;
+    }
+
+    /* Section 3: Curated Lookbook Catalog - Soft Showroom Parallax Atmosphere */
+    #catalog {
+      background: linear-gradient(180deg, #090e1a 0%, rgba(15, 23, 42, 0.90) 12%, rgba(15, 23, 42, 0.93) 88%, #070a12 100%),
+                  url('/images/store_bg.jpg') center top / cover no-repeat fixed !important;
+      border-top: 1.5px solid rgba(245, 158, 11, 0.2) !important;
+    }
+    .editorial-product-card {
+      border-radius: 24px !important;
+      background: rgba(255, 255, 255, 0.045) !important;
+      backdrop-filter: blur(16px) !important;
+      -webkit-backdrop-filter: blur(16px) !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.09) !important;
+      overflow: hidden;
+      box-shadow: 0 12px 35px -5px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .editorial-product-card:hover {
+      transform: translateY(-6px) scale(1.01) !important;
+      border-color: rgba(245, 158, 11, 0.55) !important;
+      box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.7), 0 0 30px rgba(245, 158, 11, 0.2) !important;
+    }
+    .editorial-img-box {
+      border-radius: 20px 20px 0 0 !important;
+    }
+    .category-tab-btn {
+      border-radius: 9999px !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.12) !important;
+    }
+    .category-tab-btn.active {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+      color: #000000 !important;
+      font-weight: 800 !important;
+      border-color: transparent !important;
+      box-shadow: 0 4px 18px rgba(245, 158, 11, 0.4) !important;
+    }
+
+    /* Section 4: Flagship Showroom & Experience - Heritage Warm Amber Tone */
+    #store-info {
+      background: radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.18) 0%, transparent 60%),
+                  linear-gradient(180deg, #070a12 0%, #0d1527 100%) !important;
+      border-top: 1.5px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    .portal-hub-card {
+      border-radius: 28px !important;
+      background: rgba(255, 255, 255, 0.04) !important;
+      backdrop-filter: blur(18px) !important;
+      -webkit-backdrop-filter: blur(18px) !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.09) !important;
+      padding: 36px 30px !important;
+      box-shadow: 0 14px 40px -5px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .portal-hub-card:hover {
+      transform: translateY(-5px) !important;
+      border-color: rgba(56, 189, 248, 0.45) !important;
+      box-shadow: 0 22px 50px -10px rgba(0, 0, 0, 0.65), 0 0 25px rgba(56, 189, 248, 0.15) !important;
+    }
+
+    /* Section 5: Footer */
+    .sq-footer {
+      background: #05070d !important;
+      border-top: 1.5px solid rgba(255, 255, 255, 0.08) !important;
     }
   </style>
 </head>
