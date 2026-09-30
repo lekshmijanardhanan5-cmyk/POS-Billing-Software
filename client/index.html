@@ -129,44 +129,6 @@
     }
 
     /* -------------------------------------------------------------
-       INFINITE SLIDING MARQUEE TICKER RIBBON
-       ------------------------------------------------------------- */
-    .luxury-marquee-wrap {
-      overflow: hidden;
-      white-space: nowrap;
-      background: linear-gradient(90deg, #1e1b4b 0%, #0f172a 50%, #1e1b4b 100%);
-      border-top: 1.5px solid rgba(245, 158, 11, 0.35);
-      border-bottom: 1.5px solid rgba(245, 158, 11, 0.35);
-      padding: 14px 0;
-      position: relative;
-      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6);
-      z-index: 5;
-    }
-    .luxury-marquee-track {
-      display: inline-flex;
-      gap: 40px;
-      animation: marqueeSlide 30s linear infinite;
-      will-change: transform;
-    }
-    .luxury-marquee-wrap:hover .luxury-marquee-track {
-      animation-play-state: paused;
-    }
-    .luxury-marquee-track span {
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #fde68a;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    @keyframes marqueeSlide {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    /* -------------------------------------------------------------
        SMOOTH HORIZONTAL SLIDING CAROUSEL FOR LOOKBOOK CATALOG
        ------------------------------------------------------------- */
     .catalog-slider-outer {
@@ -401,28 +363,6 @@
       </div>
     </div>
   </section>
-
-  <!-- Infinite Smooth Sliding Luxury Ticker Ribbon -->
-  <div class="luxury-marquee-wrap">
-    <div class="luxury-marquee-track">
-      <span>✦ KANCHIPURAM BRIDAL SILKS</span>
-      <span>✦ AUTHENTIC KERALA KASAVU HANDLOOMS</span>
-      <span>✦ FAST 80MM THERMAL POS BILLING</span>
-      <span>✦ CALICUT FLAGSHIP SHOWROOM</span>
-      <span>✦ LIVE INVENTORY BARCODE SCAN</span>
-      <span>✦ WHATSAPP E-BILLING</span>
-      <span>✦ ATOMIC STOCK LOCKING</span>
-      <span>✦ PURE LINEN & READY-TO-WEAR</span>
-      <span>✦ KANCHIPURAM BRIDAL SILKS</span>
-      <span>✦ AUTHENTIC KERALA KASAVU HANDLOOMS</span>
-      <span>✦ FAST 80MM THERMAL POS BILLING</span>
-      <span>✦ CALICUT FLAGSHIP SHOWROOM</span>
-      <span>✦ LIVE INVENTORY BARCODE SCAN</span>
-      <span>✦ WHATSAPP E-BILLING</span>
-      <span>✦ ATOMIC STOCK LOCKING</span>
-      <span>✦ PURE LINEN & READY-TO-WEAR</span>
-    </div>
-  </div>
 
   <!-- Bento Grid Editorial Features -->
   <section id="features" class="section-wrapper">
@@ -957,6 +897,6 @@
   </footer>
 
   <!-- External Clean Interaction Script -->
-  <script src="/js/landing.js?v=6"></script>
+  <script src="/js/landing.js?v=7"></script>
 </body>
 </html>
