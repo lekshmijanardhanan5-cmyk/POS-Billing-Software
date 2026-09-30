@@ -138,8 +138,8 @@ body {
   position: relative;
   padding: 100px 24px 60px 24px;
   text-align: center;
-  background: linear-gradient(180deg, rgba(9, 13, 22, 0.78) 0%, rgba(9, 13, 22, 0.95) 100%),
-              url('/images/store_bg.jpg') center/cover no-repeat fixed;
+  background: linear-gradient(180deg, rgba(9, 13, 22, 0.55) 0%, rgba(9, 13, 22, 0.75) 50%, rgba(9, 13, 22, 0.95) 100%),
+              url('/images/store_bg.jpg') center top / cover no-repeat fixed;
   overflow: hidden;
 }
 
