@@ -138,7 +138,8 @@ body {
   position: relative;
   padding: 100px 24px 60px 24px;
   text-align: center;
-  background: radial-gradient(circle at 50% 10%, rgba(99, 102, 241, 0.18) 0%, rgba(9, 13, 22, 1) 70%);
+  background: linear-gradient(180deg, rgba(9, 13, 22, 0.78) 0%, rgba(9, 13, 22, 0.95) 100%),
+              url('/images/store_bg.jpg') center/cover no-repeat fixed;
   overflow: hidden;
 }
 
