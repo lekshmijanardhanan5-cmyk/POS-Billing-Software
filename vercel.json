@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "config/wsgi.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "15mb",
+        "runtime": "python3.12"
+      }
+    },
+    {
+      "src": "client/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(css|js|images)/(.*)",
+      "dest": "/client/$1/$2"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "config/wsgi.py"
+    }
+  ]
+}
