@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ==========================================================================
+       MOBILE ADMIN PORTAL - MOBILE APPLICATION-STYLE WEB LAYOUT
+       Kerala Textiles POS & Billing Management System
+       Features: Complete Admin Portal functionality (Products CRUD, Staff,
+                 Returns, Suppliers & Ledger, Reports & Transactions)
+       ========================================================================== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Mobile Admin Portal - Textile POS</title>
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/mobile.css">
+</head>
+<body>
+
+  <!-- Outer Wrapper for Desktop & Responsive View -->
+  <div class="mobile-wrapper">
+
+    <!-- Top Device Toolbar for Testing in Desktop Browsers -->
+    <div class="device-toolbar">
+      <button onclick="toggleFrameSize()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+        <span id="frame-toggle-text">Toggle Wide View</span>
+      </button>
+      <a href="/admin-portal/">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+        Desktop Admin View
+      </a>
+      <a href="/billing/">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+        Billing Portal
+      </a>
+    </div>
+
+    <!-- Smartphone App Frame Container -->
+    <div class="mobile-frame" id="app-frame">
+      
+      <!-- Top Mobile App Header Bar -->
+      <header class="mobile-header">
+        <div class="app-info">
+          <span class="sub">Admin Portal (Mobile)</span>
+          <h2 id="mobile-header-title">Store Overview</h2>
+        </div>
+        <div class="header-actions">
+          <a href="/admin-portal/" class="btn-header-link" title="Open Desktop View">Desktop</a>
+          <button onclick="logout()" class="btn-logout" title="Sign Out">Exit</button>
+        </div>
+      </header>
+
+      <!-- Scrollable Mobile App Screen Body -->
+      <main class="mobile-body">
+        
+        <!-- ==============================================================
+             TAB 1: STORE OVERVIEW & REPORTS (KPIs, Low Stock, Recent Bills)
+             ============================================================== -->
+        <div id="tab-dashboard" class="tab-pane active">
+          <!-- 4-Tile Stat Grid -->
+          <div class="stat-grid">
+            <div class="stat-card">
+              <span class="label">Total Revenue</span>
+              <h3 id="m-total-rev">₹0.00</h3>
+              <small id="m-today-rev">Today: ₹0.00</small>
+            </div>
+            <div class="stat-card">
+              <span class="label">Total Invoices</span>
+              <h3 id="m-total-orders">0</h3>
+              <small id="m-today-orders">Today: 0 bills</small>
+            </div>
+            <div class="stat-card">
+              <span class="label">Catalog Items</span>
+              <h3 id="m-total-prods">0</h3>
+              <small style="color:#64748b;">Active Products</small>
+            </div>
+            <div class="stat-card">
+              <span class="label">Vendors</span>
+              <h3 id="m-total-suppliers">0</h3>
+              <small style="color:#64748b;">Registered Suppliers</small>
+            </div>
+          </div>
+
+          <!-- Low Stock Warning Alert Box -->
+          <div class="alert-box">
+            <h4 style="display:flex; align-items:center; gap:6px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+              Low Stock Reorder Alerts
+            </h4>
+            <div id="m-low-stock-list" class="low-stock-items">
+              <!-- Populated by mobile.js -->
+            </div>
+          </div>
+
+          <!-- Recent Invoices & Transactions -->
+          <div class="card-box">
+            <div class="card-box-header">
+              <h4>Recent Sales Transactions</h4>
+              <button class="m-btn m-btn-outline m-btn-sm" onclick="switchTab('invoices')">View All</button>
+            </div>
+            <div id="m-dashboard-invoices-list" class="m-list">
+              <!-- Populated by mobile.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             TAB 2: PRODUCT MANAGEMENT & CRUD
+             ============================================================== -->
+        <div id="tab-products" class="tab-pane">
+          <!-- Action Bar: Search & Toggle Add Product -->
+          <div style="display:flex; gap:8px; margin-bottom:12px;">
+            <div class="m-search-wrap" style="flex:1; margin:0;">
+              <span class="m-search-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              </span>
+              <input type="text" id="m-product-search" class="m-search-input" placeholder="Search products or barcode...">
+            </div>
+            <button class="m-btn m-btn-primary" onclick="toggleForm('m-add-prod-form')">
+              + New Product
+            </button>
+          </div>
+
+          <!-- Expandable Add Product Form -->
+          <form id="m-add-prod-form" class="expandable-form">
+            <h4 style="font-size:12px; margin-bottom:10px; color:#4338ca;">Create New Product</h4>
+            <div class="m-form-group">
+              <label>Product Name</label>
+              <input type="text" id="mp-name" class="m-input" placeholder="e.g. Linen Cotton Shirt" required>
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
+              <div class="m-form-group">
+                <label>Barcode</label>
+                <input type="text" id="mp-barcode" class="m-input" placeholder="8901099" required>
+              </div>
+              <div class="m-form-group">
+                <label>Category</label>
+                <select id="mp-category" class="m-input" required>
+                  <option value="">Select Category...</option>
+                </select>
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
+              <div class="m-form-group">
+                <label>Size</label>
+                <select id="mp-size" class="m-input">
+                  <option value="Free Size">Free Size</option>
+                  <option value="S">S</option>
+                  <option value="M">M</option>
+                  <option value="L">L</option>
+                  <option value="XL">XL</option>
+                  <option value="XXL">XXL</option>
+                  <option value="2-3Y">2-3Y</option>
+                  <option value="4-5Y">4-5Y</option>
+                  <option value="6.25m">6.25m (Saree)</option>
+                  <option value="2.0m">2.0m (Mundu)</option>
+                </select>
+              </div>
+              <div class="m-form-group">
+                <label>Color</label>
+                <input type="text" id="mp-color" class="m-input" placeholder="e.g. Navy Blue">
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:6px;">
+              <div class="m-form-group">
+                <label>Cost (₹)</label>
+                <input type="number" step="0.01" id="mp-cost" class="m-input" placeholder="400" required>
+              </div>
+              <div class="m-form-group">
+                <label>Price (₹)</label>
+                <input type="number" step="0.01" id="mp-price" class="m-input" placeholder="899" required>
+              </div>
+              <div class="m-form-group">
+                <label>Stock</label>
+                <input type="number" id="mp-stock" class="m-input" placeholder="20" required>
+              </div>
+            </div>
+
+            <!-- Image File Upload or URL -->
+            <div class="m-form-group">
+              <label>Product Image</label>
+              <div style="display:flex; gap:8px; align-items:center;">
+                <input type="text" id="mp-image-url" class="m-input" placeholder="Paste URL or upload file" style="flex:1;">
+                <label class="m-btn m-btn-outline m-btn-sm" style="cursor:pointer; white-space:nowrap;">
+                  Upload
+                  <input type="file" id="mp-image-file" accept="image/*" style="display:none;">
+                </label>
+              </div>
+            </div>
+
+            <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:8px;">
+              <button type="button" class="m-btn m-btn-outline" onclick="toggleForm('m-add-prod-form')">Cancel</button>
+              <button type="submit" class="m-btn m-btn-primary">Save Product</button>
+            </div>
+          </form>
+
+          <!-- Products List Cards -->
+          <div id="m-products-list" class="m-list">
+            <!-- Populated by mobile.js -->
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             TAB 3: STAFF MANAGEMENT
+             ============================================================== -->
+        <div id="tab-staff" class="tab-pane">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <h4 style="font-size:13px; font-weight:700;">Store Team Members</h4>
+            <button class="m-btn m-btn-primary m-btn-sm" onclick="toggleForm('m-add-staff-form')">
+              + New Staff
+            </button>
+          </div>
+
+          <!-- Add Staff Form -->
+          <form id="m-add-staff-form" class="expandable-form">
+            <h4 style="font-size:12px; margin-bottom:10px; color:#4338ca;">Register Staff Member</h4>
+            <div class="m-form-group">
+              <label>Username</label>
+              <input type="text" id="ms-username" class="m-input" placeholder="cashier_name" required>
+            </div>
+            <div class="m-form-group">
+              <label>Email Address</label>
+              <input type="email" id="ms-email" class="m-input" placeholder="cashier@pos.com">
+            </div>
+            <div class="m-form-group">
+              <label>Password</label>
+              <input type="password" id="ms-password" class="m-input" placeholder="Staff@123" required>
+            </div>
+            <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:8px;">
+              <button type="button" class="m-btn m-btn-outline" onclick="toggleForm('m-add-staff-form')">Cancel</button>
+              <button type="submit" class="m-btn m-btn-primary">Create Account</button>
+            </div>
+          </form>
+
+          <!-- Staff Cards List -->
+          <div id="m-staff-list" class="m-list">
+            <!-- Populated by mobile.js -->
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             TAB 4: PRODUCT RETURNS
+             ============================================================== -->
+        <div id="tab-returns" class="tab-pane">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <h4 style="font-size:13px; font-weight:700;">Customer Returns</h4>
+            <button class="m-btn m-btn-danger m-btn-sm" onclick="toggleForm('m-add-return-form')">
+              + Process Return
+            </button>
+          </div>
+
+          <!-- Process Return Form -->
+          <form id="m-add-return-form" class="expandable-form">
+            <h4 style="font-size:12px; margin-bottom:10px; color:#b91c1c;">Process Return & Stock Restore</h4>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
+              <div class="m-form-group">
+                <label>Invoice ID</label>
+                <input type="number" id="mr-inv-id" class="m-input" placeholder="e.g. 1" required>
+              </div>
+              <div class="m-form-group">
+                <label>Product ID</label>
+                <input type="number" id="mr-prod-id" class="m-input" placeholder="e.g. 2" required>
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
+              <div class="m-form-group">
+                <label>Quantity</label>
+                <input type="number" id="mr-qty" class="m-input" value="1" min="1" required>
+              </div>
+              <div class="m-form-group">
+                <label>Refund (₹)</label>
+                <input type="number" step="0.01" id="mr-refund" class="m-input" placeholder="1299.00" required>
+              </div>
+            </div>
+            <div class="m-form-group">
+              <label>Reason</label>
+              <input type="text" id="mr-reason" class="m-input" placeholder="e.g. Size mismatch, stitching flaw">
+            </div>
+            <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:8px;">
+              <button type="button" class="m-btn m-btn-outline" onclick="toggleForm('m-add-return-form')">Cancel</button>
+              <button type="submit" class="m-btn m-btn-danger">Restore Stock</button>
+            </div>
+          </form>
+
+          <!-- Returns History Cards -->
+          <div id="m-returns-list" class="m-list">
+            <!-- Populated by mobile.js -->
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             TAB 5: SUPPLIER MANAGEMENT & LEDGER
+             ============================================================== -->
+        <div id="tab-suppliers" class="tab-pane">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <h4 style="font-size:13px; font-weight:700;">Supplier Ledger</h4>
+            <button class="m-btn m-btn-primary m-btn-sm" onclick="toggleForm('m-add-sup-form')">
+              + New Supplier
+            </button>
+          </div>
+
+          <!-- Register Supplier Form -->
+          <form id="m-add-sup-form" class="expandable-form">
+            <h4 style="font-size:12px; margin-bottom:10px; color:#4338ca;">Register Vendor / Supplier</h4>
+            <div class="m-form-group">
+              <label>Supplier Name</label>
+              <input type="text" id="msup-name" class="m-input" placeholder="e.g. Surat Silk Mills" required>
+            </div>
+            <div class="m-form-group">
+              <label>Phone Number</label>
+              <input type="text" id="msup-phone" class="m-input" placeholder="+91 98470 12345" required>
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
+              <div class="m-form-group">
+                <label>GST Number</label>
+                <input type="text" id="msup-gst" class="m-input" placeholder="32AAAAA0000A1Z5">
+              </div>
+              <div class="m-form-group">
+                <label>Opening Bal (₹)</label>
+                <input type="number" step="0.01" id="msup-balance" class="m-input" placeholder="0.00" value="0.00">
+              </div>
+            </div>
+            <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:8px;">
+              <button type="button" class="m-btn m-btn-outline" onclick="toggleForm('m-add-sup-form')">Cancel</button>
+              <button type="submit" class="m-btn m-btn-primary">Save Supplier</button>
+            </div>
+          </form>
+
+          <!-- Suppliers Cards List -->
+          <div id="m-suppliers-list" class="m-list">
+            <!-- Populated by mobile.js -->
+          </div>
+        </div>
+
+        <!-- ==============================================================
+             TAB 6: ALL TRANSACTIONS & INVOICES
+             ============================================================== -->
+        <div id="tab-invoices" class="tab-pane">
+          <div class="card-box-header">
+            <h4>All Sales Invoices</h4>
+          </div>
+          <div id="m-all-invoices-list" class="m-list">
+            <!-- Populated by mobile.js -->
+          </div>
+        </div>
+
+      </main>
+
+      <!-- Bottom Mobile App Navigation Bar (5 Primary Tabs) -->
+      <nav class="mobile-nav">
+        <button class="nav-item active" onclick="switchTab('dashboard', 'Store Overview')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          <small>Overview</small>
+        </button>
+        <button class="nav-item" onclick="switchTab('products', 'Products Catalog')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+          <small>Products</small>
+        </button>
+        <button class="nav-item" onclick="switchTab('staff', 'Team Members')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <small>Staff</small>
+        </button>
+        <button class="nav-item" onclick="switchTab('returns', 'Product Returns')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <small>Returns</small>
+        </button>
+        <button class="nav-item" onclick="switchTab('suppliers', 'Supplier Ledger')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+          <small>Ledger</small>
+        </button>
+      </nav>
+
+    </div>
+  </div>
+
+  <!-- Mobile Invoice Details Modal -->
+  <div id="m-invoice-modal" class="mobile-modal">
+    <div class="mobile-modal-content">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #e2e8f0; padding-bottom:10px; margin-bottom:12px;">
+        <h4 id="m-modal-title" style="font-size:14px; margin:0;">Invoice Details</h4>
+        <button onclick="closeMobileInvoiceModal()" class="m-btn m-btn-outline m-btn-sm">Close</button>
+      </div>
+      <div id="m-modal-body">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/mobile.js"></script>
+</body>
+</html>

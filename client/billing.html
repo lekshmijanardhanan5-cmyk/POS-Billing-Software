@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ==========================================================================
+       BILLING PORTAL - CASHIER POS INTERFACE
+       Textile POS Billing Management System
+       Features: Barcode search, category filters, cart, thermal receipt.
+       ========================================================================== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Billing Counter - Textile POS</title>
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/billing.css">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="top-nav">
+    <div class="brand-title" style="display:flex; align-items:center; gap:10px;">
+      <img src="/images/kerala_textiles_logo.jpg" alt="Kerala Textiles Logo" style="width:34px; height:34px; border-radius:50%; object-fit:cover; border:1.5px solid rgba(245,158,11,0.6); box-shadow:0 2px 8px rgba(0,0,0,0.3); flex-shrink:0;">
+      <div>
+        <h2 style="margin:0; font-size:15px; font-weight:900; letter-spacing:0.04em; color:#ffffff;">KERALA TEXTILES</h2>
+        <span style="font-size:10px; color:#94a3b8; font-weight:600; letter-spacing:0.1em; text-transform:uppercase;">Billing POS</span>
+      </div>
+    </div>
+    <div class="user-status" id="user-status-bar" style="display:flex; align-items:center; gap:10px;">
+      <span id="user-display-label"></span>
+      <button onclick="openZReportModal()" class="btn btn-outline" style="padding: 5px 12px; font-size: 12px; color:#ffffff; border-color:rgba(255,255,255,0.25); display:inline-flex; align-items:center; gap:6px;" title="Day-End Shift Closure & Cash Reconciliation">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        Z-Report
+      </button>
+      <button onclick="logout()" class="btn btn-danger" style="padding: 5px 12px; font-size: 12px;">Logout</button>
+    </div>
+  </header>
+
+  <!-- POS Master Layout -->
+  <main class="pos-container">
+    
+    <!-- Left: Catalog & Product Selection -->
+    <section class="products-section">
+      
+      <!-- Search Input with Barcode Support -->
+      <div class="search-bar-wrap">
+        <span class="search-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </span>
+        <input 
+          type="text" 
+          id="barcode-search" 
+          class="input-field" 
+          placeholder="Scan barcode (e.g. 8901001) or search product name..." 
+          autofocus
+        >
+      </div>
+
+      <!-- Quick Category Filter Pills -->
+      <div class="category-filter-bar">
+        <button class="category-pill active" onclick="filterCategory('ALL')">All Categories</button>
+        <button class="category-pill" onclick="filterCategory('Men\'s Wear')">Men's Wear</button>
+        <button class="category-pill" onclick="filterCategory('Women\'s Wear')">Women's Wear</button>
+        <button class="category-pill" onclick="filterCategory('Kids Wear')">Kids Wear</button>
+        <button class="category-pill" onclick="filterCategory('Fabrics & Materials')">Fabrics</button>
+      </div>
+
+      <!-- Quick Size Filter Pills -->
+      <div class="size-filter-bar" style="display:flex; gap:6px; margin-bottom:14px; overflow-x:auto; padding-bottom:4px; align-items:center;">
+        <span style="font-size:11px; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-right:4px; white-space:nowrap;">Size:</span>
+        <button class="size-pill active" onclick="filterSize('ALL')">All Sizes</button>
+        <button class="size-pill" onclick="filterSize('S')">S</button>
+        <button class="size-pill" onclick="filterSize('M')">M</button>
+        <button class="size-pill" onclick="filterSize('L')">L</button>
+        <button class="size-pill" onclick="filterSize('XL')">XL</button>
+        <button class="size-pill" onclick="filterSize('XXL')">XXL</button>
+        <button class="size-pill" onclick="filterSize('30')">30</button>
+        <button class="size-pill" onclick="filterSize('32')">32</button>
+        <button class="size-pill" onclick="filterSize('34')">34</button>
+        <button class="size-pill" onclick="filterSize('36')">36</button>
+        <button class="size-pill" onclick="filterSize('FREE')">Free Size</button>
+        <button class="size-pill" onclick="filterSize('1 Meter')">1 Meter</button>
+      </div>
+
+      <!-- Dynamic Products Grid -->
+      <div id="products-grid" class="products-grid">
+        <!-- Rendered dynamically by billing.js -->
+      </div>
+    </section>
+
+    <!-- Right: Shopping Cart & Checkout -->
+    <section class="cart-section">
+      <div class="cart-header">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary);"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+          <h3 class="cart-title">Current Invoice</h3>
+        </div>
+        <span id="cart-count-badge" class="badge badge-indigo">0 Items</span>
+      </div>
+
+      <!-- Optional Customer Details & Loyalty Lookup -->
+      <div class="customer-inputs">
+        <input type="text" id="cust-phone" class="input-field" placeholder="Cust Mobile (e.g. 9847012345)" oninput="checkCustomerLoyalty(this.value)">
+        <input type="text" id="cust-name" class="input-field" placeholder="Cust Name (Optional)">
+      </div>
+
+      <!-- Real-time Loyalty Points Member Banner -->
+      <div id="loyalty-box" style="display:none; margin: 8px 0 4px 0; background:linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border:1px solid #93c5fd; border-radius:8px; padding:8px 12px; font-size:12px; align-items:center; justify-content:space-between;">
+        <div>
+          <span style="font-weight:700; color:#1e40af;">🌟 Loyalty Member:</span> <span id="loyalty-cust-name" style="font-weight:600; color:#1e293b;"></span><br>
+          <span style="color:#1d4ed8; font-size:11px;">Points: <b id="loyalty-points-val">0</b> (Value: ₹<span id="loyalty-cash-val">0</span>)</span>
+        </div>
+        <button type="button" id="redeem-points-btn" class="btn btn-primary" onclick="redeemLoyaltyPoints()" style="padding:4px 10px; font-size:11px; font-weight:700;">
+          Redeem
+        </button>
+      </div>
+
+      <!-- Cart Line Items -->
+      <div id="cart-items" class="cart-items">
+        <p style="color:var(--text-light); text-align:center; padding: 40px 0; font-size:13px;">
+          Cart is empty.<br>Click items on the left or scan a barcode to add.
+        </p>
+      </div>
+
+      <!-- Bill Calculations Summary -->
+      <div class="bill-summary">
+        <div class="row">
+          <span>Subtotal:</span>
+          <span id="subtotal">₹0.00</span>
+        </div>
+        <div class="row">
+          <span>Discount (₹):</span>
+          <input 
+            type="number" 
+            id="discount-input" 
+            value="0" 
+            min="0" 
+            style="width: 80px; text-align: right; border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 4px;"
+          >
+        </div>
+
+        <!-- Festival Promo Code Box -->
+        <div class="row" style="margin-top:6px; align-items:center;">
+          <span style="font-size:12px;">Promo Code:</span>
+          <div style="display:flex; gap:4px;">
+            <input type="text" id="promo-input" placeholder="e.g. ONAM10" style="width: 95px; text-transform:uppercase; font-weight:700; font-size:11px; padding:4px 6px; border:1.5px solid var(--border); border-radius:var(--radius-sm);">
+            <button type="button" class="btn btn-primary" onclick="applyPromoCode()" style="padding:4px 8px; font-size:11px;">Apply</button>
+          </div>
+        </div>
+        <div style="display:flex; gap:4px; margin-top:4px; flex-wrap:wrap; justify-content:flex-end;">
+          <span class="promo-chip" onclick="quickApplyPromo('ONAM10')">🎉 ONAM10 (10% Off)</span>
+          <span class="promo-chip" onclick="quickApplyPromo('VISHU15')">🌸 VISHU15 (15% Off)</span>
+          <span class="promo-chip" onclick="quickApplyPromo('FESTIVE100')">🎁 ₹100 Off</span>
+        </div>
+        <div id="promo-status-msg" style="text-align:right; font-size:11px; margin-top:2px;"></div>
+
+        <div class="row">
+          <span>GST (5%):</span>
+          <span id="tax-amount">₹0.00</span>
+        </div>
+        <div class="row total-row">
+          <span>Grand Total:</span>
+          <span id="grand-total">₹0.00</span>
+        </div>
+      </div>
+
+      <!-- Payment Method Selection -->
+      <div class="payment-modes-grid">
+        <div class="pay-chip active" onclick="setPaymentMode('CASH', this)">Cash</div>
+        <div class="pay-chip" onclick="setPaymentMode('UPI', this)">UPI / QR</div>
+        <div class="pay-chip" onclick="setPaymentMode('CARD', this)">Card</div>
+      </div>
+
+      <!-- Checkout Action Button -->
+      <button id="checkout-btn" class="btn btn-success checkout-btn">
+        Complete Checkout & Print Bill
+      </button>
+    </section>
+
+  </main>
+
+  <!-- 80mm Thermal Receipt Print Preview Modal -->
+  <div id="receipt-modal" class="modal-backdrop" style="display: none;">
+    <div class="receipt-card">
+      <div id="printable-receipt" class="receipt-content">
+        <!-- Rendered dynamically by billing.js -->
+      </div>
+      <div class="receipt-actions" style="display:flex; gap:8px; flex-wrap:wrap;">
+        <button onclick="window.print()" class="btn btn-primary" style="flex: 1; display:inline-flex; align-items:center; justify-content:center; gap:6px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+          Print Receipt
+        </button>
+        <button onclick="shareReceiptWhatsApp()" class="btn" style="background:#25D366; color:#ffffff; border:none; display:inline-flex; align-items:center; justify-content:center; gap:6px; font-weight:700; font-size:12px; padding:10px 14px; flex:1;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+          WhatsApp E-Bill
+        </button>
+        <button onclick="closeReceipt()" class="btn btn-outline">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day-End Cashier Z-Report Modal -->
+  <div id="z-report-modal" class="modal-backdrop" style="display: none;">
+    <div class="receipt-card" style="width: 440px;">
+      <div id="z-report-content" class="receipt-content">
+        <!-- Rendered dynamically by billing.js -->
+      </div>
+      <div class="receipt-actions">
+        <button onclick="window.print()" class="btn btn-primary" style="flex: 1;">Print Z-Report</button>
+        <button onclick="closeZReportModal()" class="btn btn-outline">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Details Inspection Modal -->
+  <div id="product-detail-modal" class="modal-backdrop" style="display: none;">
+    <div class="pdm-card">
+      <div class="pdm-header">
+        <h3 id="pdm-title" class="pdm-title">Product Details</h3>
+        <button onclick="closeProductDetailModal()" class="btn btn-outline" style="padding:4px 10px; font-size:12px;">Close</button>
+      </div>
+      <div id="pdm-body">
+        <!-- Rendered dynamically by billing.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/billing.js"></script>
+</body>
+</html>

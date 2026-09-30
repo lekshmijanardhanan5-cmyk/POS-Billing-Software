@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ==========================================================================
+       ADMIN PORTAL - DESKTOP VIEW
+       Textile POS Billing Management System
+       Features: Dashboard KPIs, Product Inventory Management, Staff Management,
+                 Returns Handling with stock restoration, and Supplier Ledger.
+       ========================================================================== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal - Textile POS</title>
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-logo" style="display:flex; align-items:center; gap:10px;">
+        <img src="/images/kerala_textiles_logo.jpg" alt="Kerala Textiles Logo" style="width:36px; height:36px; border-radius:50%; object-fit:cover; border:1.5px solid rgba(245,158,11,0.6); box-shadow:0 2px 8px rgba(0,0,0,0.3); flex-shrink:0;">
+        <div>
+          <h2 style="margin:0; font-size:15px; font-weight:900; letter-spacing:0.04em;">KERALA TEXTILES</h2>
+          <span style="font-size:10px; color:#818cf8; font-weight:700; letter-spacing:0.12em; text-transform:uppercase;">Admin Portal</span>
+        </div>
+      </div>
+
+      <nav class="admin-nav-group">
+        <button class="nav-btn active" onclick="showAdminTab('dashboard')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          Dashboard
+        </button>
+        <button class="nav-btn" onclick="showAdminTab('products')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+          Products
+        </button>
+        <button class="nav-btn" onclick="showAdminTab('staff')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Staff Members
+        </button>
+        <button class="nav-btn" onclick="showAdminTab('customers')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Customers
+        </button>
+        <button class="nav-btn" onclick="showAdminTab('returns')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+          Product Returns
+        </button>
+        <button class="nav-btn" onclick="showAdminTab('suppliers')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+          Supplier Ledger
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="/billing/" class="nav-btn" style="color: #34d399; margin-bottom: 6px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+          Open Billing POS
+        </a>
+        <a href="/admin-mobile/" class="nav-btn" style="color: #818cf8; margin-bottom: 6px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+          📱 Mobile Admin UI
+        </a>
+        <button onclick="logout()" class="btn btn-danger" style="width: 100%;">Logout</button>
+      </div>
+    </aside>
+
+    <!-- Main Workspace Content -->
+    <main class="admin-main">
+      
+      <!-- TAB 1: DASHBOARD & ANALYTICS -->
+      <section id="tab-dashboard" class="tab-section active">
+        <div class="page-header" style="display:flex; justify-content:space-between; align-items:center;">
+          <h1>Store Performance & Reports</h1>
+        </div>
+
+        <!-- KPI Metric Tiles -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <span class="kpi-label">Total Revenue</span>
+            <div id="d-revenue" class="kpi-value">₹0.00</div>
+            <span id="d-today-revenue" class="kpi-sub">Today: ₹0.00</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Total Invoices</span>
+            <div id="d-orders" class="kpi-value">0</div>
+            <span id="d-today-orders" class="kpi-sub">Today: 0 bills</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Active Products</span>
+            <div id="d-products" class="kpi-value">0</div>
+            <span class="kpi-sub">In stock catalog</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Active Suppliers</span>
+            <div id="d-suppliers" class="kpi-value">0</div>
+            <span class="kpi-sub">Onboarded partners</span>
+          </div>
+        </div>
+
+        <!-- Recent Sales Invoices History -->
+        <div class="content-card">
+          <h3>Recent Sales Invoices</h3>
+          <div class="table-responsive">
+            <table class="data-table" id="invoices-table">
+              <thead>
+                <tr>
+                  <th>Invoice No</th>
+                  <th>Customer</th>
+                  <th>Cashier</th>
+                  <th>Payment</th>
+                  <th>Grand Total</th>
+                  <th>Date & Time</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Populated via admin.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Low Stock Warning Alerts -->
+        <div class="content-card">
+          <h3 style="color: var(--danger); display: flex; align-items: center; gap: 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+            Low Stock Alert (Needs Reorder)
+          </h3>
+          <div class="table-responsive">
+            <table class="data-table" id="low-stock-table">
+              <thead>
+                <tr>
+                  <th>Barcode</th>
+                  <th>Product</th>
+                  <th>Size</th>
+                  <th>Stock Available</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Populated via admin.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: PRODUCT INVENTORY MANAGEMENT -->
+      <section id="tab-products" class="tab-section">
+        <div class="page-header">
+          <h1>Product Inventory</h1>
+        </div>
+
+        <!-- Add Product Form Card -->
+        <div class="content-card">
+          <h3>Add New Textile Product</h3>
+          <form id="add-product-form">
+            <div class="form-grid-4">
+              <div>
+                <label style="font-size:12px; font-weight:700;">Product Name</label>
+                <input type="text" id="p-name" class="input-field" placeholder="e.g. Formal Cotton Shirt" required>
+              </div>
+              <div>
+                <label style="font-size:12px; font-weight:700;">Barcode / SKU</label>
+                <input type="text" id="p-barcode" class="input-field" placeholder="e.g. 8901007" required>
+              </div>
+              <div>
+                <label style="font-size:12px; font-weight:700;">Category</label>
+                <select id="p-category" class="input-field" required>
+                  <option value="">Select Category...</option>
+                  <option value="1">Men's Wear</option>
+                  <option value="2">Women's Wear</option>
+                  <option value="3">Kids Wear</option>
+                  <option value="4">Fabrics & Materials</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size:12px; font-weight:700;">Size</label>
+                <select id="p-size" class="input-field">
+                  <option value="FREE">Free Size / Unstitched</option>
+                  <option value="XS">XS - Extra Small</option>
+                  <option value="S">S - Small</option>
+                  <option value="M">M - Medium</option>
+                  <option value="L">L - Large</option>
+                  <option value="XL">XL - Extra Large</option>
+                  <option value="XXL">XXL</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size:12px; font-weight:700;">Color</label>
+                <input type="text" id="p-color" class="input-field" placeholder="e.g. Navy Blue">
+              </div>
+              <div>
+                <label style="font-size:12px; font-weight:700;">Cost Price (₹)</label>
+                <input type="number" step="0.01" id="p-cost" class="input-field" placeholder="500.00" required>
+              </div>
+              <div>
+                <label style="font-size:12px; font-weight:700;">Selling Price (₹)</label>
+                <input type="number" step="0.01" id="p-price" class="input-field" placeholder="999.00" required>
+              </div>
+              <div>
+                <label style="font-size:12px; font-weight:700;">Stock Quantity</label>
+                <input type="number" id="p-stock" class="input-field" placeholder="25" required>
+              </div>
+              
+              <!-- Product Image Section (Upload & URL with Live Preview) -->
+              <div class="image-input-container">
+                <div class="image-preview-box" title="Image Preview">
+                  <img id="p-image-preview" src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=120&q=80" alt="Preview">
+                </div>
+                <div class="image-input-fields">
+                  <div style="flex:1; min-width:240px;">
+                    <label style="font-size:11px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Product Image (URL or Upload File)</label>
+                    <input type="text" id="p-image-url" class="input-field" placeholder="Paste image link (https://...) or click Upload to select a file" style="margin:0;">
+                  </div>
+                  <div>
+                    <label class="btn-upload-label" title="Choose image file from computer">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                      <span id="upload-status-text">Choose File to Upload</span>
+                      <input type="file" id="p-image-file" accept="image/jpeg,image/png,image/webp" style="display:none;">
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div style="grid-column: 1 / -1; display:flex; justify-content:flex-end; margin-top:8px;">
+                <button type="submit" class="btn btn-primary" style="height:44px; padding: 0 32px; font-size:14px; font-weight:700;">Save Product</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Products Table -->
+        <div class="content-card">
+          <h3>Current Inventory Catalog</h3>
+          <div class="table-responsive">
+            <table class="data-table" id="products-table">
+              <thead>
+                <tr>
+                  <th>Barcode</th>
+                  <th>Product</th>
+                  <th>Category</th>
+                  <th>Size / Color</th>
+                  <th>Cost Price</th>
+                  <th>Selling Price</th>
+                  <th>Current Stock</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Populated via admin.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: STAFF MANAGEMENT -->
+      <section id="tab-staff" class="tab-section">
+        <div class="page-header">
+          <h1>Staff & Access Control</h1>
+        </div>
+
+        <!-- Add Staff Form -->
+        <div class="content-card">
+          <h3>Register New Cashier Account</h3>
+          <form id="add-staff-form" style="display:flex; gap: 12px; align-items:flex-end; flex-wrap:wrap;">
+            <div style="flex:1; min-width: 180px;">
+              <label style="font-size:12px; font-weight:700;">Username</label>
+              <input type="text" id="s-username" class="input-field" placeholder="cashier2" required>
+            </div>
+            <div style="flex:1; min-width: 180px;">
+              <label style="font-size:12px; font-weight:700;">Email</label>
+              <input type="email" id="s-email" class="input-field" placeholder="cashier2@pos.com">
+            </div>
+            <div style="flex:1; min-width: 180px;">
+              <label style="font-size:12px; font-weight:700;">Password</label>
+              <input type="password" id="s-password" class="input-field" placeholder="Staff@123" required>
+            </div>
+            <button type="submit" class="btn btn-primary" style="height:42px;">Create Account</button>
+          </form>
+        </div>
+
+        <!-- Staff List Table -->
+        <div class="content-card">
+          <h3>Team Members</h3>
+          <div class="table-responsive">
+            <table class="data-table" id="staff-table">
+              <thead>
+                <tr>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Date Joined</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Populated via admin.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: PRODUCT RETURNS -->
+      <section id="tab-returns" class="tab-section">
+        <div class="page-header">
+          <h1>Product Return Handling</h1>
+        </div>
+
+        <div class="content-card">
+          <h3>Process Product Return</h3>
+          <form id="return-form">
+            <div class="form-grid-4">
+              <div>
+                <label style="font-size:12px; font-weight:700;">Invoice ID</label>
+                <input type="number" id="r-inv-id" class="input-field" placeholder="e.g. 1" required>
+              </div>
+              <div>
+                <label style="font-size:12px; font-weight:700;">Product ID</label>
+                <input type="number" id="r-prod-id" class="input-field" placeholder="e.g. 2" required>
+              </div>
+              <div>
+                <label style="font-size:12px; font-weight:700;">Return Quantity</label>
+                <input type="number" id="r-qty" class="input-field" value="1" min="1" required>
+              </div>
+              <div>
+                <label style="font-size:12px; font-weight:700;">Refund Amount (₹)</label>
+                <input type="number" step="0.01" id="r-refund" class="input-field" placeholder="1299.00" required>
+              </div>
+            </div>
+            <div style="margin-top:12px; display:flex; gap:12px;">
+              <input type="text" id="r-reason" class="input-field" placeholder="Reason (e.g. Size mismatch, defective stitching)" style="flex:1;">
+              <button type="submit" class="btn btn-danger">Process Return & Restore Stock</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="content-card">
+          <h3>Processed Returns History</h3>
+          <div class="table-responsive">
+            <table class="data-table" id="returns-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Invoice No</th>
+                  <th>Product</th>
+                  <th>Return Qty</th>
+                  <th>Refund (₹)</th>
+                  <th>Reason</th>
+                  <th>Date & Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Populated via admin.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 5: SUPPLIER LEDGER -->
+      <section id="tab-suppliers" class="tab-section">
+        <div class="page-header">
+          <h1>Supplier Ledger & Balances</h1>
+        </div>
+
+        <!-- Add Supplier Form Card -->
+        <div class="content-card">
+          <h3>Register New Supplier</h3>
+          <form id="add-supplier-form" style="display:flex; gap: 12px; align-items:flex-end; flex-wrap:wrap;">
+            <div style="flex:1; min-width: 180px;">
+              <label style="font-size:12px; font-weight:700;">Supplier / Vendor Name</label>
+              <input type="text" id="sup-name" class="input-field" placeholder="e.g. Surat Silk Mills" required>
+            </div>
+            <div style="flex:1; min-width: 150px;">
+              <label style="font-size:12px; font-weight:700;">Phone</label>
+              <input type="text" id="sup-phone" class="input-field" placeholder="+91 98470 12345" required>
+            </div>
+            <div style="flex:1; min-width: 150px;">
+              <label style="font-size:12px; font-weight:700;">GST Number</label>
+              <input type="text" id="sup-gst" class="input-field" placeholder="32AAAAA0000A1Z5">
+            </div>
+            <div style="flex:1; min-width: 120px;">
+              <label style="font-size:12px; font-weight:700;">Opening Balance (₹)</label>
+              <input type="number" step="0.01" id="sup-balance" class="input-field" placeholder="0.00" value="0.00">
+            </div>
+            <button type="submit" class="btn btn-primary" style="height:42px;">Save Supplier</button>
+          </form>
+        </div>
+
+        <div class="content-card">
+          <h3>Registered Suppliers</h3>
+          <div class="table-responsive">
+            <table class="data-table" id="suppliers-table">
+              <thead>
+                <tr>
+                  <th>Supplier Name</th>
+                  <th>Phone</th>
+                  <th>GST Number</th>
+                  <th>Outstanding Balance</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Populated via admin.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 6: CUSTOMERS DIRECTORY & LOYALTY -->
+      <section id="tab-customers" class="tab-section">
+        <div class="page-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+          <div>
+            <h1>Customer Directory & Loyalty Ledger</h1>
+            <p style="color:var(--text-muted); font-size:13px; margin:4px 0 0 0;">View customer purchasing history, contact information, and reward points balance.</p>
+          </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <div style="position:relative; display:flex; align-items:center;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; left:12px; color:var(--text-muted); pointer-events:none;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <input type="text" id="cust-search-input" class="input-field" placeholder="Search by name or phone..." style="width:280px; height:40px; padding-left:36px; margin:0;" oninput="filterCustomers(this.value)">
+            </div>
+          </div>
+        </div>
+
+        <!-- Customer Summary Metrics -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <span class="kpi-label">Registered Customers</span>
+            <div id="c-total-customers" class="kpi-value">0</div>
+            <span class="kpi-sub">Total retail customer accounts</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Customer Revenue</span>
+            <div id="c-total-revenue" class="kpi-value">₹0.00</div>
+            <span class="kpi-sub">Lifetime purchases</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Total Loyalty Points</span>
+            <div id="c-total-points" class="kpi-value">0 pts</div>
+            <span class="kpi-sub">Points in circulation</span>
+          </div>
+        </div>
+
+        <!-- Customers Table -->
+        <div class="content-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+            <h3 style="margin:0;">Customer Profiles</h3>
+            <span id="cust-count-badge" style="font-size:12px; font-weight:700; color:#4f46e5; background:#eef2ff; padding:4px 12px; border-radius:20px;">0 Customers</span>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table" id="customers-table">
+              <thead>
+                <tr>
+                  <th>Customer</th>
+                  <th>Phone Number</th>
+                  <th>Email</th>
+                  <th>Loyalty Points</th>
+                  <th>Orders</th>
+                  <th>Lifetime Spend</th>
+                  <th>Registered</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Populated via admin.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Customer Invoices History Modal -->
+  <div id="customer-modal" class="modal-backdrop" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(15,23,42,0.6); backdrop-filter:blur(4px); z-index:9999; align-items:center; justify-content:center;">
+    <div style="background:#ffffff; border-radius:16px; width:92%; max-width:750px; max-height:90vh; overflow-y:auto; padding:24px; box-shadow:0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:14px; margin-bottom:16px;">
+        <div>
+          <h3 id="modal-cust-name" style="margin:0; font-size:18px; font-weight:800; color:#1e293b;">Customer Purchase History</h3>
+          <span id="modal-cust-sub" style="font-size:12px; color:var(--text-muted);">Phone & details</span>
+        </div>
+        <button onclick="closeCustomerModal()" class="btn btn-outline" style="padding:5px 12px; font-size:12px;">Close</button>
+      </div>
+      <div id="modal-cust-stats" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin-bottom:18px;">
+        <!-- Injected dynamically -->
+      </div>
+      <div id="modal-cust-body">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Invoice Details Modal -->
+  <div id="invoice-modal" class="modal-backdrop" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(15,23,42,0.6); backdrop-filter:blur(4px); z-index:9999; align-items:center; justify-content:center;">
+    <div style="background:#ffffff; border-radius:12px; width:90%; max-width:650px; max-height:90vh; overflow-y:auto; padding:24px; box-shadow:0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+        <h3 id="modal-inv-title" style="margin:0; font-size:18px;">Invoice Details</h3>
+        <button onclick="closeInvoiceModal()" class="btn btn-outline" style="padding:4px 10px; font-size:12px;">Close</button>
+      </div>
+      <div id="modal-inv-body">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Garment Barcode Price Tag Modal -->
+  <div id="barcode-tag-modal" class="modal-backdrop" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(15,23,42,0.6); backdrop-filter:blur(4px); z-index:9999; align-items:center; justify-content:center;">
+    <div style="background:#ffffff; border-radius:12px; width:90%; max-width:400px; padding:20px; box-shadow:0 20px 25px -5px rgba(0,0,0,0.15);">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:10px; margin-bottom:14px;">
+        <h3 style="margin:0; font-size:16px;">🏷️ Garment Price Tag</h3>
+        <button onclick="closeBarcodeTagModal()" class="btn btn-outline" style="padding:3px 8px; font-size:11px;">Close</button>
+      </div>
+      <div id="barcode-tag-content" style="display:flex; justify-content:center;">
+        <!-- Rendered dynamically -->
+      </div>
+      <div style="display:flex; gap:8px; margin-top:16px;">
+        <button onclick="window.print()" class="btn btn-primary" style="flex:1;">Print Label Tag</button>
+        <button onclick="closeBarcodeTagModal()" class="btn btn-outline">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

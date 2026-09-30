@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ==========================================================================
+       KERALA TEXTILES POS - SQUARESPACE-INSPIRED LUXURY EDITORIAL LANDING PAGE
+       Architecture: High-contrast typography, interactive hero terminal preview,
+       bento grid feature showcase, luxury garment lookbook, and portal access.
+       ========================================================================== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kerala Textiles POS — Modern Point of Sale & Retail Management</title>
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/landing.css">
+</head>
+<body>
+
+  <!-- Sticky Top Navigation Header -->
+  <header class="landing-header">
+    <a href="/" class="landing-logo">
+      <img src="/images/kerala_textiles_logo.jpg" alt="Kerala Textiles Logo" class="landing-logo-img">
+      <div style="display:flex; flex-direction:column; line-height:1.15;">
+        <span style="font-weight:900; letter-spacing:0.06em; font-size:16px;">KERALA TEXTILES</span>
+        <span style="font-size:9.5px; font-weight:700; letter-spacing:0.16em; color:var(--sq-text-dim); text-transform:uppercase;">Retail POS System</span>
+      </div>
+    </a>
+
+    <nav class="landing-nav">
+      <a href="#features" class="nav-link" data-i18n="nav_features">Features</a>
+      <a href="#catalog" class="nav-link" data-i18n="nav_collections">Collections</a>
+      
+      <!-- Language Selector Dropdown -->
+      <div class="lang-dropdown-wrapper" style="position:relative;">
+        <button id="lang-toggle-btn" class="theme-toggle-btn" onclick="toggleLangMenu(event)" title="Choose Language / ഭാഷ മാറ്റുക">
+          <span id="lang-icon">🌐</span>
+          <span id="lang-btn-text">English</span>
+          <span style="font-size:8px; opacity:0.6; margin-left:2px;">▼</span>
+        </button>
+        <div id="lang-menu" class="lang-menu-dropdown" style="display:none;">
+          <button class="lang-opt-btn" data-lang="en" onclick="setLanguage('en')"><span style="font-size:14px;">🇬🇧</span> English</button>
+          <button class="lang-opt-btn" data-lang="ml" onclick="setLanguage('ml')"><span style="font-size:14px;">🇮🇳</span> മലയാളം</button>
+          <button class="lang-opt-btn" data-lang="hi" onclick="setLanguage('hi')"><span style="font-size:14px;">🇮🇳</span> हिन्दी</button>
+          <button class="lang-opt-btn" data-lang="ta" onclick="setLanguage('ta')"><span style="font-size:14px;">🇮🇳</span> தமிழ்</button>
+          <button class="lang-opt-btn" data-lang="ar" onclick="setLanguage('ar')"><span style="font-size:14px;">🇦🇪</span> العربية</button>
+        </div>
+      </div>
+
+      <!-- Theme Switcher Button -->
+      <button id="theme-toggle-btn" class="theme-toggle-btn" onclick="toggleTheme()" title="Switch Light / Dark Theme">
+        <span id="theme-icon">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        </span>
+        <span id="theme-btn-text">Light</span>
+      </button>
+      <a href="/login/" class="nav-cta-btn" data-i18n="nav_signin">Sign In</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-pill">
+      <span class="hero-pill-dot"></span>
+      <span data-i18n="hero_pill">Next-Gen Textile Commerce & POS Platform</span>
+    </div>
+
+    <h1 class="hero-title" data-i18n="hero_title">
+      Everything to run your <br><span class="gradient-text">textile retail.</span>
+    </h1>
+
+    <p class="hero-sub" data-i18n="hero_sub">
+      Premium bridal silks, authentic Kasavu handlooms, and contemporary ready-to-wear fashion.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#catalog" class="sq-pill-btn sq-btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+        <span data-i18n="hero_btn_explore">Explore Collections</span>
+      </a>
+      <a href="/login/" class="sq-pill-btn sq-btn-secondary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg>
+        <span data-i18n="hero_btn_signin">Staff Sign In</span>
+      </a>
+    </div>
+
+    <!-- Interactive Hero POS Terminal Showcase -->
+    <div class="hero-mockup-wrapper">
+      <div class="hero-mockup-frame">
+        <div class="mockup-topbar">
+          <div class="mockup-dots">
+            <span class="mockup-dot dot-red"></span>
+            <span class="mockup-dot dot-yellow"></span>
+            <span class="mockup-dot dot-green"></span>
+          </div>
+          <div class="mockup-title" data-i18n="mockup_title">KERALA TEXTILES POS • TERMINAL 01 • LIVE ACTIVE SESSION</div>
+          <div style="font-size: 11px; color: var(--sq-emerald); font-weight: 700; letter-spacing: 0.05em;" data-i18n="mockup_active">ACTIVE TERMINAL</div>
+        </div>
+
+        <div class="mockup-body">
+          <!-- Scanned Items List -->
+          <div>
+            <div style="font-size: 12px; font-weight: 700; color: var(--sq-text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px;" data-i18n="mockup_cart_title">Active Cart Items</div>
+            
+            <div class="mockup-item-row">
+              <div class="mockup-item-info">
+                <img class="mockup-item-img" src="/images/denim_jacket.jpg" alt="Denim Jacket">
+                <div>
+                  <div style="font-size: 13px; font-weight: 700; color: #ffffff;" data-i18n="mockup_item_1_name">Boys Washed Denim Jacket</div>
+                  <div style="font-size: 11px; color: var(--sq-text-dim);">Size: S • Barcode: 8901005 • Qty: 1</div>
+                </div>
+              </div>
+              <div style="font-size: 14px; font-weight: 800; color: #ffffff;">₹1,149.00</div>
+            </div>
+
+            <div class="mockup-item-row">
+              <div class="mockup-item-info">
+                <img class="mockup-item-img" src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=400&q=80" alt="Shirt">
+                <div>
+                  <div style="font-size: 13px; font-weight: 700; color: #ffffff;" data-i18n="mockup_item_2_name">Classic Formal Cotton Shirt</div>
+                  <div style="font-size: 11px; color: var(--sq-text-dim);">Size: L • Barcode: 8901001 • Qty: 1</div>
+                </div>
+              </div>
+              <div style="font-size: 14px; font-weight: 800; color: #ffffff;">₹1,299.00</div>
+            </div>
+          </div>
+
+          <!-- Checkout & Tender Summary -->
+          <div class="mockup-summary-card">
+            <div>
+              <div style="font-size: 12px; font-weight: 700; color: var(--sq-text-muted); text-transform: uppercase; letter-spacing: 0.08em;" data-i18n="mockup_summary_title">Quick Bill Summary</div>
+              <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--sq-text-dim); margin-top: 10px;">
+                <span data-i18n="mockup_subtotal_label">Subtotal (2 items)</span>
+                <span>₹2,448.00</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--sq-text-dim); margin-top: 4px;">
+                <span data-i18n="mockup_gst_label">GST Tax (5%)</span>
+                <span>₹122.40</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 16px; font-weight: 900; color: #ffffff; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 10px; padding-top: 10px;">
+                <span data-i18n="mockup_grand_label">Grand Total</span>
+                <span style="color: #38bdf8;">₹2,570.40</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="mockup-tender-badges">
+                <span class="tender-chip active">CASH</span>
+                <span class="tender-chip">UPI QR</span>
+                <span class="tender-chip">CARD</span>
+              </div>
+              <a href="/billing/" class="sq-pill-btn sq-btn-primary" style="width: 100%; justify-content: center; padding: 10px; font-size: 12px;" data-i18n="mockup_checkout_btn">
+                Proceed to Checkout
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bento Grid Editorial Features -->
+  <section id="features" class="section-wrapper">
+    <div class="section-header-editorial">
+      <div class="section-pretitle" data-i18n="bento_pretitle">Engineered For Retail Scale</div>
+      <h2 class="section-title" data-i18n="bento_title">Built for high-volume retail. Refined for speed.</h2>
+      <p class="section-subtitle" data-i18n="bento_subtitle">
+        Eliminate billing bottlenecks, prevent overselling, and monitor your textile store's health in real time.
+      </p>
+    </div>
+
+    <div class="bento-grid">
+      <!-- Bento Card 1: Span 2 -->
+      <div class="bento-card bento-col-2">
+        <div class="bento-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div>
+          <h3 data-i18n="bento_1_title">High-Speed Cashier POS Counter</h3>
+          <p data-i18n="bento_1_desc">
+            Scan physical barcodes or key in product codes with keyboard-only controls. Adjust quantity, apply instant percentage discounts, and print formatted 80mm thermal receipts with GST tax breakdowns in seconds.
+          </p>
+          <span class="bento-tag" data-i18n="bento_1_tag">Instant Checkout Engine →</span>
+        </div>
+      </div>
+
+      <!-- Bento Card 2 -->
+      <div class="bento-card">
+        <div class="bento-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+        </div>
+        <div>
+          <h3 data-i18n="bento_2_title">Garment Variant Matrix</h3>
+          <p data-i18n="bento_2_desc">
+            Effortlessly categorize your entire store inventory across sizes (S, M, L, XL, XXL, Free Size), colors, fabric types, and distinct barcode tags.
+          </p>
+          <span class="bento-tag" data-i18n="bento_2_tag">Multi-Attribute Catalog →</span>
+        </div>
+      </div>
+
+      <!-- Bento Card 3 -->
+      <div class="bento-card">
+        <div class="bento-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <h3 data-i18n="bento_3_title">Atomic Stock Deduction</h3>
+          <p data-i18n="bento_3_desc">
+            Database-level locking guarantees no stock overselling during rush hours. Inventory levels instantly reflect across all cashier counters.
+          </p>
+          <span class="bento-tag" data-i18n="bento_3_tag">Zero Race Conditions →</span>
+        </div>
+      </div>
+
+      <!-- Bento Card 4: Span 2 -->
+      <div class="bento-card bento-col-2">
+        <div class="bento-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+        </div>
+        <div>
+          <h3 data-i18n="bento_4_title">Supplier Accounting & Product Returns</h3>
+          <p data-i18n="bento_4_desc">
+            Keep comprehensive financial ledgers for textile mills, fabric suppliers, and wholesale purchases. Handle customer returns with automated inventory restocking directly to the shelf.
+          </p>
+          <span class="bento-tag" data-i18n="bento_4_tag">Wholesale Ledger Audit →</span>
+        </div>
+      </div>
+
+      <!-- Bento Card 5 -->
+      <div class="bento-card">
+        <div class="bento-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><line x1="12" x2="12.01" y1="18" y2="18"/></svg>
+        </div>
+        <div>
+          <h3 data-i18n="bento_5_title">Pocket Manager Mobile App</h3>
+          <p data-i18n="bento_5_desc">
+            Check today's revenue, inspect low-stock alerts, and view transaction history from any smartphone using our responsive mobile web app.
+          </p>
+          <span class="bento-tag" data-i18n="bento_5_tag">Mobile Web App →</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Editorial Lookbook Catalog (Squarespace Fashion Gallery) -->
+  <section id="catalog" class="section-wrapper" style="border-top: 1px solid var(--sq-card-border);">
+    <div class="section-header-editorial">
+      <div class="section-pretitle" data-i18n="catalog_pretitle">Curated Lookbook</div>
+      <h2 class="section-title" data-i18n="catalog_title">Live Garment Catalog</h2>
+      <p class="section-subtitle" data-i18n="catalog_subtitle">
+        Explore current collections pre-loaded with barcode SKU mapping and live pricing.
+      </p>
+    </div>
+
+    <!-- Category Filter Tabs -->
+    <div class="category-filter-nav">
+      <button class="category-tab-btn active" onclick="filterCatalog('all', this)" data-i18n="cat_tab_all">All Collections (16)</button>
+      <button class="category-tab-btn" onclick="filterCatalog('men', this)" data-i18n="cat_tab_men">Men's Wear (5)</button>
+      <button class="category-tab-btn" onclick="filterCatalog('women', this)" data-i18n="cat_tab_women">Women's Wear (4)</button>
+      <button class="category-tab-btn" onclick="filterCatalog('kids', this)" data-i18n="cat_tab_kids">Kids Wear (4)</button>
+      <button class="category-tab-btn" onclick="filterCatalog('fabrics', this)" data-i18n="cat_tab_fabrics">Fabrics & Materials (3)</button>
+    </div>
+
+    <div class="catalog-grid-editorial" id="editorial-grid">
+      <!-- KIDS WEAR 1 -->
+      <div class="editorial-product-card" data-category="kids">
+        <div class="editorial-img-box">
+          <img src="/images/denim_jacket.jpg" alt="Boys Washed Denim Jacket">
+          <span class="editorial-pill-tag">Kids Wear</span>
+        </div>
+        <div class="editorial-card-body">
+          <div>
+            <h4>Boys Washed Denim Jacket</h4>
+            <div class="editorial-meta">Size: S • Ocean Indigo • Code: 8901005</div>
+          </div>
+          <div class="editorial-price-row">
+            <span class="editorial-price">₹1,149.00</span>
+            <a href="/billing/" class="btn-quick-bill" data-i18n="bill_item">Bill Item</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- KIDS WEAR 2 -->
+      <div class="editorial-product-card" data-category="kids">
+        <div class="editorial-img-box">
+          <img src="/images/tulle_frock.jpg" alt="Girls Party Wear Tulle Frock">
+          <span class="editorial-pill-tag">Kids Wear</span>
+        </div>
+        <div class="editorial-card-body">
+          <div>
+            <h4>Girls Party Wear Tulle Frock</h4>
+            <div class="editorial-meta">Size: M • Peach Rose • Code: 8901012</div>
+          </div>
+          <div class="editorial-price-row">
+            <span class="editorial-price">₹1,299.00</span>
+            <a href="/billing/" class="btn-quick-bill" data-i18n="bill_item">Bill Item</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- KIDS WEAR 3 -->
+      <div class="editorial-product-card" data-category="kids">
+        <div class="editorial-img-box">
+          <img src="/images/kurta_pajama.jpg" alt="Boys Festive Kurta Pajama Set">
+          <span class="editorial-pill-tag">Kids Wear</span>
+        </div>
+        <div class="editorial-card-body">
+          <div>
+            <h4>Boys Festive Kurta Pajama Set</h4>
+            <div class="editorial-meta">Size: S • Maroon & Gold • Code: 8901013</div>
+          </div>
+          <div class="editorial-price-row">
+            <span class="editorial-price">₹899.00</span>
+            <a href="/billing/" class="btn-quick-bill" data-i18n="bill_item">Bill Item</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- KIDS WEAR 4 -->
+      <div class="editorial-product-card" data-category="kids">
+        <div class="editorial-img-box">
+          <img src="/images/kids_dungaree.jpg" alt="Kids Printed Cotton Dungaree">
+          <span class="editorial-pill-tag">Kids Wear</span>
+        </div>
+        <div class="editorial-card-body">
+          <div>
+            <h4>Kids Printed Cotton Dungaree</h4>
+            <div class="editorial-meta">Size: S • Denim Blue • Code: 8901014</div>
+          </div>
+          <div class="editorial-price-row">
+            <span class="editorial-price">₹749.00</span>
+            <a href="/billing/" class="btn-quick-bill" data-i18n="bill_item">Bill Item</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- MEN'S WEAR 1 -->
+      <div class="editorial-product-card" data-category="men">
+        <div class="editorial-img-box">
+          <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=600&q=80" alt="Classic Formal Cotton Shirt">
+          <span class="editorial-pill-tag">Men's Wear</span>
+        </div>
+        <div class="editorial-card-body">
+          <div>
+            <h4>Classic Formal Cotton Shirt</h4>
+            <div class="editorial-meta">Size: L • Sky Blue • Code: 8901001</div>
+          </div>
+          <div class="editorial-price-row">
+            <span class="editorial-price">₹1,299.00</span>
+            <a href="/billing/" class="btn-quick-bill" data-i18n="bill_item">Bill Item</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- MEN'S WEAR 2 -->
+      <div class="editorial-product-card" data-category="men">
+        <div class="editorial-img-box">
+          <img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=600&q=80" alt="Slim Fit Chinos Trouser">
+          <span class="editorial-pill-tag">Men's Wear</span>
+        </div>
+        <div class="editorial-card-body">
+          <div>
+            <h4>Slim Fit Chinos Trouser</h4>
+            <div class="editorial-meta">Size: 32 • Khaki Beige • Code: 8901002</div>
+          </div>
+          <div class="editorial-price-row">
+            <span class="editorial-price">₹1,599.00</span>
+            <a href="/billing/" class="btn-quick-bill" data-i18n="bill_item">Bill Item</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- MEN'S WEAR 3 -->
+      <div class="editorial-product-card" data-category="men">
+        <div class="editorial-img-box">
+          <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=600&q=80" alt="Casual Linen Striped Shirt">
+          <span class="editorial-pill-tag">Men's Wear</span>
+        </div>
+        <div class="editorial-card-body">
+          <div>
+            <h4>Casual Linen Striped Shirt</h4>
+            <div class="editorial-meta">Size: XL • Olive Green • Code: 8901006</div>
+          </div>
+          <div class="editorial-price-row">
+            <span class="editorial-price">₹1,399.00</span>
+            <a href="/billing/" class="btn-quick-bill" data-i18n="bill_item">Bill Item</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- MEN'S WEAR 4 -->
+      <div class="editorial-product-card" data-category="men">
+        <div class="editorial-img-box">
+          <img src="/images/kerala_mundu.jpg" alt="Pure Cotton Kerala Kasavu Mundu">
+          <span class="editorial-pill-tag">Men's Wear</span>
+        </div>
+        <div class="editorial-card-body">
+          <div>
+            <h4>Pure Cotton Kerala Kasavu Mundu</h4>
+            <div class="editorial-meta">Size: FREE • Cream/Gold • Code: 8901007</div>
+          </div>
+          <div class="editorial-price-row">
+            <span class="editorial-price">₹850.00</span>
+            <a href="/billing/" class="btn-quick-bill" data-i18n="bill_item">Bill Item</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- MEN'S WEAR 5 -->
+      <div class="editorial-product-card" data-category="men">
+        <div class="editorial-img-box">
+          <img src="/images/jeans_dark.jpg" alt="Dark Navy Denim Jeans">
+          <span class="editorial-pill-tag">Men's Wear</span>
+        </div>
+        <div class="editorial-card-body">
+          <div>
+            <h4>Dark Navy Denim Jeans</h4>
+            <div class="editorial-meta">Size: 34 • Dark Navy • Code: 8901008</div>
+          </div>
+          <div class="editorial-price-row">
+            <span class="editorial-price">₹1,799.00</span>
+            <a href="/billing/" class="btn-quick-bill" data-i18n="bill_item">Bill Item</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- WOMEN'S WEAR 1 -->
+      <div class="editorial-product-card" data-category="women">
+        <div class="editorial-img-box">
+          <img src="/images/kanchipuram_silk_saree.jpg" alt="Kanchipuram Silk Bridal Saree">
+          <span class="editorial-pill-tag">Women's Wear</span>
+        </div>
+        <div class="editorial-card-body">
+          <div>
+            <h4>Kanchipuram Silk Bridal Saree</h4>
+            <div class="editorial-meta">Size: FREE • Deep Maroon • Code: 8901003</div>
+          </div>
+          <div class="editorial-price-row">
+            <span class="editorial-price">₹5,499.00</span>
+            <a href="/billing/" class="btn-quick-bill" data-i18n="bill_item">Bill Item</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- WOMEN'S WEAR 2 -->
+      <div class="editorial-product-card" data-category="women">
+        <div class="editorial-img-box">
+          <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&q=80" alt="Embroidered Anarkali Kurti">
+          <span class="editorial-pill-tag">Women's Wear</span>
+        </div>
+        <div class="editorial-card-body">
+          <div>
+            <h4>Embroidered Anarkali Kurti</h4>
+            <div class="editorial-meta">Size: M • Mustard Yellow • Code: 8901004</div>
+          </div>
+          <div class="editorial-price-row">
+            <span class="editorial-price">₹999.00</span>
+            <a href="/billing/" class="btn-quick-bill" data-i18n="bill_item">Bill Item</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- WOMEN'S WEAR 3 -->
+      <div class="editorial-product-card" data-category="women">
+        <div class="editorial-img-box">
+          <img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=600&q=80" alt="Kerala Kasavu Traditional Saree">
+          <span class="editorial-pill-tag">Women's Wear</span>
+        </div>
+        <div class="editorial-card-body">
+          <div>
+            <h4>Kerala Kasavu Traditional Saree</h4>
+            <div class="editorial-meta">Size: FREE • Off-White Gold • Code: 8901009</div>
+          </div>
+          <div class="editorial-price-row">
+            <span class="editorial-price">₹2,499.00</span>
+            <a href="/billing/" class="btn-quick-bill" data-i18n="bill_item">Bill Item</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- WOMEN'S WEAR 4 -->
+      <div class="editorial-product-card" data-category="women">
+        <div class="editorial-img-box">
+          <img src="/images/kurta_set.jpg" alt="Floral Print Georgette Kurta Set">
+          <span class="editorial-pill-tag">Women's Wear</span>
+        </div>
+        <div class="editorial-card-body">
+          <div>
+            <h4>Floral Print Georgette Kurta Set</h4>
+            <div class="editorial-meta">Size: L • Dusty Pink • Code: 8901010</div>
+          </div>
+          <div class="editorial-price-row">
+            <span class="editorial-price">₹1,699.00</span>
+            <a href="/billing/" class="btn-quick-bill" data-i18n="bill_item">Bill Item</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- FABRICS & MATERIALS 1 -->
+      <div class="editorial-product-card" data-category="fabrics">
+        <div class="editorial-img-box">
+          <img src="/images/silk_fabric.jpg" alt="Raw Silk Fabric Roll">
+          <span class="editorial-pill-tag">Fabrics</span>
+        </div>
+        <div class="editorial-card-body">
+          <div>
+            <h4>Raw Silk Fabric Roll (Per Meter)</h4>
+            <div class="editorial-meta">Size: 1 Meter • Golden Ochre • Code: 8901015</div>
+          </div>
+          <div class="editorial-price-row">
+            <span class="editorial-price">₹650.00</span>
+            <a href="/billing/" class="btn-quick-bill" data-i18n="bill_item">Bill Item</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- FABRICS & MATERIALS 2 -->
+      <div class="editorial-product-card" data-category="fabrics">
+        <div class="editorial-img-box">
+          <img src="/images/white_linen_shirting.jpg" alt="Premium White Linen Fabric">
+          <span class="editorial-pill-tag">Fabrics</span>
+        </div>
+        <div class="editorial-card-body">
+          <div>
+            <h4>Premium White Linen Fabric</h4>
+            <div class="editorial-meta">Size: 1 Meter • Crisp White • Code: 8901016</div>
+          </div>
+          <div class="editorial-price-row">
+            <span class="editorial-price">₹480.00</span>
+            <a href="/billing/" class="btn-quick-bill" data-i18n="bill_item">Bill Item</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- FABRICS & MATERIALS 3 -->
+      <div class="editorial-product-card" data-category="fabrics">
+        <div class="editorial-img-box">
+          <img src="/images/handloom_fabric.jpg" alt="Handloom Cotton Saree Cloth Material">
+          <span class="editorial-pill-tag">Fabrics</span>
+        </div>
+        <div class="editorial-card-body">
+          <div>
+            <h4>Handloom Cotton Saree Material</h4>
+            <div class="editorial-meta">Size: 1 Meter • Emerald Green • Code: 8901017</div>
+          </div>
+          <div class="editorial-price-row">
+            <span class="editorial-price">₹320.00</span>
+            <a href="/billing/" class="btn-quick-bill" data-i18n="bill_item">Bill Item</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Store Showroom & Visitor Info -->
+  <section id="store-info" class="section-wrapper" style="border-top: 1px solid var(--sq-card-border);">
+    <div class="section-header-editorial">
+      <div class="section-pretitle" data-i18n="showroom_pretitle">Showroom & Experience</div>
+      <h2 class="section-title" data-i18n="showroom_title">Visit Our Flagship Retail Showroom</h2>
+      <p class="section-subtitle" data-i18n="showroom_subtitle">Experience authentic Kasavu handlooms, bridal silk sarees, and contemporary textiles in Calicut.</p>
+    </div>
+
+    <div class="portals-grid">
+      <div class="portal-hub-card">
+        <div>
+          <div style="font-size: 11px; font-weight: 800; color: var(--sq-emerald); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;" data-i18n="showroom_loc_label">Store Location</div>
+          <h3 data-i18n="showroom_loc_title">Calicut Flagship Store</h3>
+          <p data-i18n="showroom_loc_desc">Fashion Street, Commercial Hub, Calicut, Kerala - 673001. Convenient customer parking and multi-floor shopping collection.</p>
+        </div>
+        <div style="font-size: 13px; color: var(--sq-text-muted); font-weight: 600;" data-i18n="showroom_loc_sub">Open Daily</div>
+      </div>
+
+      <div class="portal-hub-card">
+        <div>
+          <div style="font-size: 11px; font-weight: 800; color: var(--sq-accent-light); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;" data-i18n="showroom_hours_label">Store Hours</div>
+          <h3 data-i18n="showroom_hours_title">Operating Schedule</h3>
+          <p data-i18n="showroom_hours_desc">Monday – Saturday: 9:00 AM – 9:30 PM<br>Sunday: 10:00 AM – 8:00 PM<br>Festival and wedding shopping assistance available.</p>
+        </div>
+        <div style="font-size: 13px; color: var(--sq-text-muted); font-weight: 600;">Contact: admin@keralatextiles.com</div>
+      </div>
+
+      <div class="portal-hub-card">
+        <div>
+          <div style="font-size: 11px; font-weight: 800; color: var(--sq-cyan); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;" data-i18n="showroom_staff_label">Staff Access</div>
+          <h3 data-i18n="showroom_staff_title">Employee & POS Portal</h3>
+          <p data-i18n="showroom_staff_desc">Centralized authentication gateway for cashier checkout desks and store management administration.</p>
+        </div>
+        <a href="/login/" class="sq-pill-btn sq-btn-primary" style="justify-content: center; width: 100%;" data-i18n="showroom_staff_btn">
+          Staff Sign In
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Squarespace Luxury Editorial Footer -->
+  <footer class="sq-footer">
+    <div class="sq-footer-grid">
+      <!-- Col 1: Brand & Showroom Heritage -->
+      <div class="sq-footer-col">
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;">
+          <img src="/images/kerala_textiles_logo.jpg" alt="Kerala Textiles Logo" style="width:34px; height:34px; border-radius:50%; object-fit:cover; border:1.5px solid rgba(245,158,11,0.6); box-shadow:0 3px 10px rgba(0,0,0,0.3); flex-shrink:0;">
+          <h4 style="font-size: 15px; margin-bottom:0; letter-spacing:0.06em;">KERALA TEXTILES</h4>
+        </div>
+        <p style="margin-top: 8px;" data-i18n="footer_desc">
+          Kerala's premier retail destination for royal bridal silks, authentic Kasavu handlooms, men's tailored wear, and designer apparel.
+        </p>
+        <p style="font-size: 12px; color: var(--sq-text-dim); margin-top: 12px;">
+          📍 Fashion Street, Commercial Hub, Calicut, Kerala – 673001
+        </p>
+        <div style="display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,0.05); padding:4px 10px; border-radius:6px; font-size:11px; color:#818cf8; border:1px solid rgba(255,255,255,0.1); margin-top:12px;">
+          <span>🏛️</span> <span>GSTIN: 32AABCK1234F1Z9</span>
+        </div>
+      </div>
+
+      <!-- Col 2: Textile Collections -->
+      <div class="sq-footer-col">
+        <h4 data-i18n="footer_col_collections">Collections</h4>
+        <ul>
+          <li><a href="#catalog">Kanchipuram Bridal Silks</a></li>
+          <li><a href="#catalog">Traditional Kasavu Mundu</a></li>
+          <li><a href="#catalog">Men's Festive Kurtas</a></li>
+          <li><a href="#catalog">Kids Designer Wear</a></li>
+          <li><a href="#catalog">Pure Linen & Cotton Fabrics</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: POS Platform & Staff Portals -->
+      <div class="sq-footer-col">
+        <h4 data-i18n="footer_portals_title">Store Portals</h4>
+        <ul>
+          <li><a href="/billing/" data-i18n="footer_link_pos">Billing POS Counter</a></li>
+          <li><a href="/admin-portal/" data-i18n="footer_link_admin">Admin Portal (Desktop)</a></li>
+          <li><a href="/login/" data-i18n="footer_link_signin">Staff Sign In</a></li>
+          <li><a href="#features">Thermal Receipt Printing</a></li>
+          <li><a href="#features">WhatsApp E-Bill Share</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Showroom Hours & Customer Care -->
+      <div class="sq-footer-col">
+        <h4 data-i18n="footer_hours_title">Showroom & Support</h4>
+        <ul>
+          <li style="color:var(--sq-text-dim); font-size:12px; line-height:1.6; margin-bottom:10px;">
+            <b style="color:var(--sq-text-bright);">Mon – Sat:</b> 9:00 AM – 9:30 PM<br>
+            <b style="color:var(--sq-text-bright);">Sunday:</b> 10:00 AM – 8:00 PM
+          </li>
+          <li><a href="tel:+914952721000">📞 +91 495 272 1000</a></li>
+          <li><a href="https://wa.me/919847012345" target="_blank">💬 WhatsApp Helpdesk</a></li>
+          <li><a href="mailto:support@keralatextiles.com">✉️ support@keralatextiles.com</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Bar with Trust Marks -->
+    <div class="sq-footer-bottom">
+      <div data-i18n="footer_copyright">
+        © 2026 Kerala Textiles Retail Management System. All Rights Reserved.
+      </div>
+      <div style="display:flex; align-items:center; gap:14px; font-size:11.5px; color:var(--sq-text-dim); flex-wrap:wrap;">
+        <span>💳 Cards (Visa • RuPay • Mastercard)</span>
+        <span>•</span>
+        <span>📱 UPI (GPay • PhonePe • Paytm)</span>
+        <span>•</span>
+        <span>💵 Cash Tender</span>
+        <span>•</span>
+        <span>🔒 256-Bit SSL Secured</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Quick Language Switcher Dropdown (Bottom-Right) -->
+  <div class="floating-lang-wrapper" style="position:fixed; bottom:78px; right:24px; z-index:999;">
+    <button id="floating-lang-btn" class="floating-lang-switch" onclick="toggleFloatingLangMenu(event)" title="Choose Language / ഭാഷ മാറ്റുക" style="position:static;">
+      <span id="floating-lang-icon">🌐</span>
+      <span id="floating-lang-text">English</span>
+      <span style="font-size:8px; opacity:0.6; margin-left:2px;">▲</span>
+    </button>
+    <div id="floating-lang-menu" class="floating-lang-dropdown" style="display:none;">
+      <button class="lang-opt-btn" data-lang="en" onclick="setLanguage('en')"><span style="font-size:14px;">🇬🇧</span> English</button>
+      <button class="lang-opt-btn" data-lang="ml" onclick="setLanguage('ml')"><span style="font-size:14px;">🇮🇳</span> മലയാളം</button>
+      <button class="lang-opt-btn" data-lang="hi" onclick="setLanguage('hi')"><span style="font-size:14px;">🇮🇳</span> हिन्दी</button>
+      <button class="lang-opt-btn" data-lang="ta" onclick="setLanguage('ta')"><span style="font-size:14px;">🇮🇳</span> தமிழ்</button>
+      <button class="lang-opt-btn" data-lang="ar" onclick="setLanguage('ar')"><span style="font-size:14px;">🇦🇪</span> العربية</button>
+    </div>
+  </div>
+
+  <!-- Floating Quick Theme Switcher Button (Bottom-Right) -->
+  <button id="floating-theme-btn" class="floating-theme-switch" onclick="toggleTheme()" title="Switch Light / Dark Theme">
+    <span id="floating-theme-icon">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+    </span>
+    <span id="floating-theme-text">Light Mode</span>
+  </button>
+
+  <!-- External Clean Interaction Script -->
+  <script src="/js/landing.js"></script>
+</body>
+</html>
