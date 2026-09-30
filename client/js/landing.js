@@ -541,7 +541,46 @@
   };
 
   /* --------------------------------------------------------------------------
-     5. INITIALIZE ON DOM READY
+     5. HORIZONTAL CATALOG CAROUSEL SLIDER
+     -------------------------------------------------------------------------- */
+  window.slideCatalogCards = function(direction) {
+    const grid = document.getElementById('editorial-grid');
+    if (!grid) return;
+    const cardWidth = 320;
+    grid.scrollBy({
+      left: direction * cardWidth,
+      behavior: 'smooth'
+    });
+  };
+
+  /* --------------------------------------------------------------------------
+     6. SCROLL REVEAL (SMOOTH SLIDE-IN ON SCROLL)
+     -------------------------------------------------------------------------- */
+  function initScrollSlideAnimations() {
+    const targets = document.querySelectorAll('.scroll-slide-up, .scroll-slide-left, .scroll-slide-right');
+    if (!targets.length) return;
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      targets.forEach(el => observer.observe(el));
+    } else {
+      targets.forEach(el => el.classList.add('is-visible'));
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     7. INITIALIZE ON DOM READY
      -------------------------------------------------------------------------- */
   document.addEventListener('DOMContentLoaded', function() {
     // 1. Initialize Theme
@@ -557,6 +596,9 @@
       savedLang = localStorage.getItem('pos_landing_lang') || 'en';
     } catch (e) {}
     window.setLanguage(savedLang);
+
+    // 3. Initialize Smooth Scroll-Reveal Slide-In Animations
+    initScrollSlideAnimations();
   });
 
 })();
